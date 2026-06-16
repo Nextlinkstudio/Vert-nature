@@ -380,4 +380,61 @@ acf_add_local_field_group( array(
     ) ) ),
 ) );
 
+/* ── Mentions légales ── */
+acf_add_local_field_group( array(
+    'key'    => 'group_mentions_legales',
+    'title'  => 'Contenu de la page',
+    'fields' => array( array(
+        'key'          => 'field_mentions_content',
+        'name'         => 'legal_content',
+        'label'        => 'Contenu',
+        'type'         => 'wysiwyg',
+        'toolbar'      => 'full',
+        'media_upload' => 0,
+    ) ),
+    'location' => array( array( array(
+        'param'    => 'page_template',
+        'operator' => '==',
+        'value'    => 'page-mentions-legales.php',
+    ) ) ),
+) );
+
+/* ── Politique de confidentialité ── */
+acf_add_local_field_group( array(
+    'key'    => 'group_politique_confidentialite',
+    'title'  => 'Contenu de la page',
+    'fields' => array( array(
+        'key'          => 'field_politique_content',
+        'name'         => 'legal_content',
+        'label'        => 'Contenu',
+        'type'         => 'wysiwyg',
+        'toolbar'      => 'full',
+        'media_upload' => 0,
+    ) ),
+    'location' => array( array( array(
+        'param'    => 'page_template',
+        'operator' => '==',
+        'value'    => 'page-politique-de-confidentialite.php',
+    ) ) ),
+) );
+
+/* ── CGV ── */
+acf_add_local_field_group( array(
+    'key'    => 'group_cgv',
+    'title'  => 'Contenu de la page',
+    'fields' => array( array(
+        'key'          => 'field_cgv_content',
+        'name'         => 'legal_content',
+        'label'        => 'Contenu',
+        'type'         => 'wysiwyg',
+        'toolbar'      => 'full',
+        'media_upload' => 0,
+    ) ),
+    'location' => array( array( array(
+        'param'    => 'page_template',
+        'operator' => '==',
+        'value'    => 'page-cgv.php',
+    ) ) ),
+) );
+
 endif; // function_exists('acf_add_local_field_group')

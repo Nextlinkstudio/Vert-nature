@@ -48,9 +48,9 @@
     <div class="footer-bottom">
       <p>&copy; <?php echo date( 'Y' ); ?> Les Jardins du Chêne &mdash; Lucas Morel, Jardinier Paysagiste</p>
       <div class="footer-bottom-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Politique de confidentialité</a>
-        <a href="#">CGV</a>
+        <a href="<?php echo esc_url( home_url( '/mentions-legales/' ) ); ?>">Mentions légales</a>
+        <a href="<?php echo esc_url( home_url( '/politique-de-confidentialite/' ) ); ?>">Politique de confidentialité</a>
+        <a href="<?php echo esc_url( home_url( '/cgv/' ) ); ?>">CGV</a>
       </div>
     </div>
   </div>

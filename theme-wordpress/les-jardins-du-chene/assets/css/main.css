@@ -402,3 +402,18 @@ input, textarea, select { font-family: var(--ff-body); }
 .lightbox.open .lightbox-img { transform: scale(1); }
 .lightbox-close { position: absolute; top: 20px; right: 20px; width: 46px; height: 46px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; color: white; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .25s ease; }
 .lightbox-close:hover { background: rgba(255,255,255,.22); }
+
+/* ── Pages légales ───────────────────────────────────────── */
+.legal-page { padding-top: 80px; }
+.legal-hero { background: var(--dark-green); padding: 72px 0 56px; text-align: center; }
+.legal-hero .section-eyebrow { color: rgba(255,255,255,.7); }
+.legal-hero .section-title { color: var(--white); margin-top: .4rem; }
+.legal-content { max-width: 760px; padding-top: 56px; padding-bottom: 80px; }
+.legal-body h2 { font-family: var(--ff-title); font-size: 1.15rem; font-weight: 600; color: var(--dark-green); margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(46,78,58,.15); }
+.legal-body h2:first-child { margin-top: 0; }
+.legal-body p { color: var(--text-mid); line-height: 1.8; margin-bottom: 10px; }
+.legal-body ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 6px; }
+.legal-body ul li { color: var(--text-mid); line-height: 1.7; padding-left: 16px; position: relative; }
+.legal-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--dark-green); font-weight: 600; }
+.legal-body a { color: var(--dark-green); text-decoration: underline; }
+.legal-body strong { color: var(--text-dark); }
