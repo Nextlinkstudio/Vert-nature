@@ -48,9 +48,9 @@
     <div class="footer-bottom">
       <p>&copy; <?php echo date( 'Y' ); ?> Les Jardins du Chêne &mdash; Lucas Morel, Jardinier Paysagiste</p>
       <div class="footer-bottom-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Politique de confidentialité</a>
-        <a href="#">CGV</a>
+        <a href="<?php echo esc_url( home_url( '/mentions-legales/' ) ); ?>">Mentions légales</a>
+        <a href="<?php echo esc_url( home_url( '/politique-de-confidentialite/' ) ); ?>">Politique de confidentialité</a>
+        <a href="<?php echo esc_url( home_url( '/cgv/' ) ); ?>">CGV</a>
       </div>
     </div>
   </div>
@@ -109,9 +109,7 @@
       <button type="submit" class="form-submit" style="margin-top:8px">Confirmer le rendez-vous</button>
     </form>
     <div class="form-success" id="rdvSuccess" style="display:none">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20,6 9,17 4,12"/>
-      </svg>
+      <?php echo ljc_icon('check'); ?>
       <p><strong>Rendez-vous confirmé !</strong><br>Vous recevrez une confirmation par email. À bientôt !</p>
     </div>
   </div>
