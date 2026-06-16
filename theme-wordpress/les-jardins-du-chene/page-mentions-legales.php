@@ -7,7 +7,7 @@ $legal_content = $legal_content ?: '
 <p>Le site <strong>www.lesjardinsduchene.fr</strong> est édité par :</p>
 <ul>
   <li><strong>Lucas Morel</strong>, Jardinier Paysagiste indépendant</li>
-  <li>Micro-entrepreneur — SIRET : 000 000 000 00000</li>
+  <li>Micro-entrepreneur — SIRET : 842 159 766 00019</li>
   <li>Adresse : 12 rue des Tilleuls, 69100 Villeurbanne</li>
   <li>Téléphone : <a href="tel:0612345678">06 12 34 56 78</a></li>
   <li>Email : <a href="mailto:contact@jardins-du-chene.fr">contact@jardins-du-chene.fr</a></li>

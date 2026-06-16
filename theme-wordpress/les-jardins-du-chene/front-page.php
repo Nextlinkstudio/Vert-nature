@@ -57,10 +57,15 @@ $services_defaults = array(
         'list'  => array('Jardins naturels & sauvages','Système de récupération d\'eau','Compostage et permaculture','Potagers biologiques','Plantes mellifères'),
     ),
 );
+$icons_dir = get_template_directory() . '/assets/images/';
+$load_icon = function ($file) use ($icons_dir) {
+    $svg = @file_get_contents($icons_dir . $file);
+    return $svg ? preg_replace('/<\?xml.*?\?>/s', '', $svg) : '';
+};
 $services_icons = array(
-    1 => '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>',
-    2 => '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/></svg>',
-    3 => '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H22v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4z"/><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/></svg>',
+    1 => $load_icon('flower_1.svg'),
+    2 => $load_icon('flower_2.svg'),
+    3 => $load_icon('flower_3.svg'),
 );
 
 // Portfolio
@@ -78,10 +83,10 @@ $portfolio_cards_defaults = array(
     4 => array('img' => $assets . 'plantation_img.webp',                'title' => 'Massifs & plantations',     'location' => 'Tassin-la-Demi-Lune (69)'),
 );
 $portfolio_cards_icons = array(
-    1 => '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>',
-    2 => '<svg viewBox="0 0 24 24"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/></svg>',
-    3 => '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
-    4 => '<svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M12 12C12 7 17 4 17 4S14 9 12 12"/><path d="M12 12C12 7 7 4 7 4S10 9 12 12"/><line x1="5" y1="22" x2="19" y2="22"/></svg>',
+    1 => $load_icon('flower_1.svg'),
+    2 => $load_icon('flower_2.svg'),
+    3 => ljc_icon('grid'),
+    4 => ljc_icon('sprout'),
 );
 
 // Témoignages
@@ -156,7 +161,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
     <div class="hero-services-inner">
       <div class="hero-service-card">
         <div class="hero-service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+          <?php echo $load_icon('flower_1.svg'); ?>
         </div>
         <div class="hero-service-text">
           <strong>Création</strong>
@@ -165,7 +170,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <div class="hero-service-card">
         <div class="hero-service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+          <?php echo ljc_icon('file-text'); ?>
         </div>
         <div class="hero-service-text">
           <strong>Entretien</strong>
@@ -174,7 +179,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <div class="hero-service-card">
         <div class="hero-service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M20 2H22v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4z"/></svg>
+          <?php echo $load_icon('flower_2.svg'); ?>
         </div>
         <div class="hero-service-text">
           <strong>Éco-responsable</strong>
@@ -197,7 +202,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           <img src="<?php echo esc_url( $about_img_url ); ?>" alt="Jardin aménagé par Lucas Morel, Les Jardins du Chêne" class="about-img-photo" />
           <div class="about-img-bottom">
             <div class="about-img-bottom-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+              <?php echo $load_icon('flower_3.svg'); ?>
             </div>
             <div>
               <span class="about-img-bottom-num"><?php echo esc_html( $about_exp_num ); ?></span>
@@ -209,7 +214,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       <!-- Texte -->
       <div class="about-text fade-in fade-in-delay-1">
         <div class="about-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+          <?php echo ljc_icon('leaf'); ?>
           À propos
         </div>
         <h2 class="section-title"><?php echo esc_html( $about_title ); ?></h2>
@@ -217,7 +222,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="about-values">
           <div class="about-value">
             <div class="about-value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <?php echo ljc_icon('message'); ?>
             </div>
             <div class="about-value-content">
               <p>Écoute &amp; conseil <span class="about-value-dot"></span></p>
@@ -226,7 +231,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="about-value">
             <div class="about-value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22V12"/><path d="M12 12C12 7 17 4 17 4S14 9 12 12"/><path d="M12 12C12 7 7 4 7 4S10 9 12 12"/><line x1="5" y1="22" x2="19" y2="22"/></svg>
+              <?php echo ljc_icon('sprout'); ?>
             </div>
             <div class="about-value-content">
               <p>Savoir-faire artisanal <span class="about-value-dot"></span></p>
@@ -235,7 +240,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="about-value">
             <div class="about-value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+              <?php echo $load_icon('flower_2.svg'); ?>
             </div>
             <div class="about-value-content">
               <p>Plantes locales <span class="about-value-dot"></span></p>
@@ -244,7 +249,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="about-value">
             <div class="about-value-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              <?php echo ljc_icon('clock'); ?>
             </div>
             <div class="about-value-content">
               <p>Délais respectés <span class="about-value-dot"></span></p>
@@ -255,12 +260,12 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <a href="#devis" class="btn-devis-full">
           <span class="btn-devis-full-left">
             <span class="btn-devis-full-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+              <?php echo $load_icon('flower_1.svg'); ?>
             </span>
             Demander un devis
           </span>
           <span class="btn-devis-full-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <?php echo ljc_icon('arrow-right'); ?>
           </span>
         </a>
       </div>
@@ -308,7 +313,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           <div class="prestation-price">À partir de <?php echo $s_price; ?></div>
           <a href="#devis" class="prestation-link">
             Demander un devis
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <?php echo ljc_icon('arrow-right'); ?>
           </a>
         </div>
       </div>
@@ -330,7 +335,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="real-stats">
           <div class="real-stat-item">
             <div class="real-stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+              <?php echo $load_icon('flower_3.svg'); ?>
             </div>
             <div class="real-stat-text">
               <strong>Projets sur mesure</strong>
@@ -339,7 +344,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="real-stat-item">
             <div class="real-stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22V12"/><path d="M12 12C12 7 17 4 17 4S14 9 12 12"/><path d="M12 12C12 7 7 4 7 4S10 9 12 12"/><line x1="5" y1="22" x2="19" y2="22"/></svg>
+              <?php echo ljc_icon('sprout'); ?>
             </div>
             <div class="real-stat-text">
               <strong>Approche durable</strong>
@@ -348,7 +353,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="real-stat-item">
             <div class="real-stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9,16 11,18 15,14"/></svg>
+              <?php echo ljc_icon('calendar-check'); ?>
             </div>
             <div class="real-stat-text">
               <strong>Satisfaction client</strong>
@@ -366,7 +371,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="real-featured-overlay">
           <div class="real-featured-info">
             <div class="real-featured-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <?php echo ljc_icon('image'); ?>
             </div>
             <h4><?php echo esc_html($port_feat_title); ?></h4>
             <span><?php echo esc_html($port_feat_location); ?></span>
@@ -402,7 +407,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
     <div class="real-cta-bar fade-in">
       <div class="real-cta-left">
         <div class="real-cta-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+          <?php echo $load_icon('flower_1.svg'); ?>
         </div>
         <div>
           <strong>Un projet en tête ?</strong>
@@ -411,7 +416,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <a href="#devis" class="btn-real-devis">
         Demander un devis
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <?php echo ljc_icon('arrow-right'); ?>
       </a>
     </div>
   </div>
@@ -440,10 +445,10 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         $t_initials = $t_initials ?: $temo_defaults[$n]['initials'];
       ?>
       <div class="temoignage-card fade-in<?php echo $temo_delay[$n]; ?>">
-        <div class="temo-quote">"</div>
+        <div class="temo-quote"><?php echo ljc_icon('quote'); ?></div>
         <div class="temo-stars">
           <?php for ($s = 0; $s < 5; $s++) : ?>
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <?php echo ljc_icon('star'); ?>
           <?php endfor; ?>
         </div>
         <p class="temo-text"><?php echo esc_html($t_text); ?></p>
@@ -474,7 +479,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="devis-features">
           <div class="devis-feature">
             <div class="devis-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <?php echo ljc_icon('shield'); ?>
             </div>
             <div class="devis-feature-text">
               <strong>Devis 100% gratuit</strong>
@@ -483,7 +488,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="devis-feature">
             <div class="devis-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              <?php echo ljc_icon('clock'); ?>
             </div>
             <div class="devis-feature-text">
               <strong>Visite sur place offerte</strong>
@@ -492,7 +497,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="devis-feature">
             <div class="devis-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <?php echo ljc_icon('euro'); ?>
             </div>
             <div class="devis-feature-text">
               <strong>Tarifs transparents</strong>
@@ -501,7 +506,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="devis-feature">
             <div class="devis-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <?php echo ljc_icon('map-pin'); ?>
             </div>
             <div class="devis-feature-text">
               <strong>Déplacement inclus</strong>
@@ -512,7 +517,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="devis-stats">
           <div class="devis-stat">
             <div class="devis-stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+              <?php echo $load_icon('flower_3.svg'); ?>
             </div>
             <div class="devis-stat-value">+250</div>
             <div class="devis-stat-label">projets réalisés</div>
@@ -524,7 +529,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="devis-stat">
             <div class="devis-stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              <?php echo ljc_icon('clock'); ?>
             </div>
             <div class="devis-stat-label">Réponse sous</div>
             <div class="devis-stat-value">48h</div>
@@ -537,7 +542,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="devis-form-body">
           <h3 class="devis-form-title">
             Décrivez votre projet
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <?php echo ljc_icon('arrow-right'); ?>
           </h3>
           <form id="devisForm" novalidate>
             <?php wp_nonce_field( 'jardins_devis', 'devis_nonce' ); ?>
@@ -595,15 +600,15 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
             </div>
             <button type="submit" class="form-submit">
               <span class="form-submit-left">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+                <?php echo $load_icon('flower_2.svg'); ?>
                 Envoyer ma demande de devis
               </span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <?php echo ljc_icon('arrow-right'); ?>
             </button>
             <p class="form-note">* Champs obligatoires — Vos données restent confidentielles</p>
           </form>
           <div class="form-success" id="devisSuccess">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+            <?php echo ljc_icon('check'); ?>
             <p><strong>Demande envoyée avec succès !</strong><br>Je vous réponds sous 48h. À bientôt !</p>
           </div>
         </div>
@@ -649,7 +654,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
     <div class="rdv-features">
       <div class="rdv-feature-item">
         <div class="rdv-feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+          <?php echo $load_icon('flower_1.svg'); ?>
         </div>
         <div class="rdv-feature-text">
           <strong>Intervention sur mesure</strong>
@@ -658,7 +663,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <div class="rdv-feature-item">
         <div class="rdv-feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22V12"/><path d="M12 12C12 7 17 4 17 4S14 9 12 12"/><path d="M12 12C12 7 7 4 7 4S10 9 12 12"/><line x1="5" y1="22" x2="19" y2="22"/></svg>
+          <?php echo ljc_icon('sprout'); ?>
         </div>
         <div class="rdv-feature-text">
           <strong>Conseils d'expert</strong>
@@ -667,7 +672,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <div class="rdv-feature-item">
         <div class="rdv-feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9,16 11,18 15,14"/></svg>
+          <?php echo ljc_icon('calendar-check'); ?>
         </div>
         <div class="rdv-feature-text">
           <strong>Prise de rendez-vous simple</strong>
@@ -693,7 +698,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="contact-items">
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2H6.6a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z"/></svg>
+              <?php echo ljc_icon('phone'); ?>
             </div>
             <div class="contact-item-text">
               <strong>Téléphone</strong>
@@ -702,7 +707,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <?php echo ljc_icon('mail'); ?>
             </div>
             <div class="contact-item-text">
               <strong>Email</strong>
@@ -711,7 +716,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <?php echo ljc_icon('map-pin'); ?>
             </div>
             <div class="contact-item-text">
               <strong>Zone d'intervention</strong>
@@ -720,7 +725,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              <?php echo ljc_icon('clock'); ?>
             </div>
             <div class="contact-item-text">
               <strong>Horaires</strong>
@@ -733,7 +738,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       <div class="contact-map-wrap fade-in fade-in-delay-1">
         <div class="contact-map">
           <div class="contact-map-popup">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <?php echo ljc_icon('map-pin'); ?>
             <div>
               <strong>Basé à Lyon</strong>
               <span>Intervention dans un rayon de 40 km</span>
@@ -750,19 +755,19 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
         <div class="contact-map-features">
           <div class="contact-map-feature">
             <div class="contact-map-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <?php echo ljc_icon('users'); ?>
             </div>
             <span>Écoute &amp; conseil personnalisés</span>
           </div>
           <div class="contact-map-feature">
             <div class="contact-map-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/></svg>
+              <?php echo ljc_icon('shield-check'); ?>
             </div>
             <span>Accompagnement de A à Z</span>
           </div>
           <div class="contact-map-feature">
             <div class="contact-map-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+              <?php echo $load_icon('flower_3.svg'); ?>
             </div>
             <span>Solutions durables &amp; responsables</span>
           </div>
@@ -772,7 +777,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
     <!-- CTA -->
     <div class="contact-cta" style="margin-top:24px;">
       <div class="contact-cta-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <?php echo ljc_icon('message'); ?>
       </div>
       <div class="contact-cta-text">
         <strong>Une réponse rapide garantie</strong>
@@ -780,7 +785,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <a href="mailto:<?php echo esc_attr($contact_email); ?>" class="contact-cta-btn">
         M'écrire
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <?php echo ljc_icon('arrow-right'); ?>
       </a>
     </div>
   </div>

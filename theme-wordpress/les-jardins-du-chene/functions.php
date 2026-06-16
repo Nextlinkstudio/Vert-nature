@@ -90,7 +90,57 @@ function jardins_handle_devis() {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   4. ACF LOCAL FIELD GROUPS
+   4. BIBLIOTHÈQUE D'ICÔNES SVG
+   Source unique de vérité pour les pictogrammes du thème : on ne
+   stocke que la géométrie (le viewBox est toujours 0 0 24 24), la
+   couleur / taille / épaisseur de trait étant gérées par le CSS du
+   conteneur. Évite la duplication du markup SVG dans les templates.
+──────────────────────────────────────────────────────────────*/
+function ljc_icon_path( $name ) {
+    static $icons = array(
+        'leaf'           => '<path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/>',
+        'leaves'         => '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/>',
+        'eco'            => '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M20 2H22v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4z"/>',
+        'sprout'         => '<path d="M12 22V12"/><path d="M12 12C12 7 17 4 17 4S14 9 12 12"/><path d="M12 12C12 7 7 4 7 4S10 9 12 12"/><line x1="5" y1="22" x2="19" y2="22"/>',
+        'grid'           => '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+        'message'        => '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+        'file-text'      => '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/>',
+        'clock'          => '<circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>',
+        'arrow-right'    => '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+        'calendar-check' => '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9,16 11,18 15,14"/>',
+        'image'          => '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/>',
+        'star'           => '<polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>',
+        'shield'         => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+        'shield-check'   => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9,12 11,14 15,10"/>',
+        'euro'           => '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+        'map-pin'        => '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+        'check'          => '<polyline points="20,6 9,17 4,12"/>',
+        'users'          => '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+        'phone'          => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2H6.6a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z"/>',
+        'mail'           => '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+        'quote'          => '<path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>',
+    );
+    return isset( $icons[ $name ] ) ? $icons[ $name ] : '';
+}
+
+/**
+ * Renvoie le markup d'une icône SVG du thème.
+ *
+ * @param string $name  Clé de l'icône (voir ljc_icon_path()).
+ * @param string $class Classe CSS optionnelle ajoutée au <svg>.
+ * @return string
+ */
+function ljc_icon( $name, $class = '' ) {
+    $path = ljc_icon_path( $name );
+    if ( '' === $path ) {
+        return '';
+    }
+    $class_attr = $class ? ' class="' . esc_attr( $class ) . '"' : '';
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"' . $class_attr . '>' . $path . '</svg>';
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. ACF LOCAL FIELD GROUPS
 ──────────────────────────────────────────────────────────────*/
 if ( function_exists( 'acf_add_local_field_group' ) ) :
 
